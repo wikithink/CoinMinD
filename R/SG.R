@@ -99,6 +99,12 @@ if (UL[r] > 1) ULA[r] = 1 else ULA[r]=UL[r]
 }
 diA=ULA-LLA##FIND LENGTH OF CIs
 VOL=round(prod(diA),8)##PRODUCT OF LENGTH OF CIs
+cat('Original Intervals\n')
+cat('Lower Limit\n')
+print(LL)
+cat('Upper Limit\n')
+print(UL)
+cat('Adjusted Intervals\n')
 cat('Lower Limit\n')
 print(LLA)
 cat('Upper Limit\n')

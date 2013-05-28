@@ -4,7 +4,7 @@
 Confidence Interval - Fitzpatrick and Scott
 }
 \description{
-Fitzpatrick and Scott (1987) have proposed confidence interval (FS)
+The simultaneous confidence interval for multinomial proportions based on the method proposed in Fitzpatrick and Scott (1987)
 }
 \usage{
 FS(inpmat, alpha)
@@ -18,6 +18,9 @@ a number between 0 and 1 to get the upper 100(1-??) percentage point of the chi 
 }
 \value{
 lower, upper limits of multinomial proportions together with product of length of k intervals as volume of simultaneous confidence intervals }
+\references{
+Fitzpatrick, S. and Scott, A. (1987). Quick simultaneous confidence interval for multinomial proportions. Journal of American Statistical Association 82(399):  875-878.
+}
 \author{
 Dr M Subbiah
 }
@@ -28,22 +31,5 @@ Dr M Subbiah
 y=c(44,55,43,32,67,78)
 z=0.05
 FS(y,z)
-function (inpmat, alpha) 
-{
-    k = length(inpmat)
-    s = sum(inpmat)
-    zval = abs(qnorm(1 - (alpha/2)))
-    pi = inpmat/s
-    FS.LL = pi - (zval/(2 * sqrt(s)))
-    FS.UL = pi + (zval/(2 * sqrt(s)))
-    FS.WI = FS.UL - FS.LL
-    FS.VL = prod(FS.WI)
-    cat("Lower Limit\n")
-    print(FS.LL)
-    cat("Upper Limit\n")
-    print(FS.UL)
-    cat("Volume\n")
-    print(FS.VL)
-  }
 }
 \keyword{ Confidencelimit }

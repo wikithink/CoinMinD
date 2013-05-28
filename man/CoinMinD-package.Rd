@@ -23,7 +23,7 @@ Maintainer: Sumathi<sumathimr@yahoo.co.in>
 }
 \references{
 1.  Fitzpatrick, S. and Scott, A. (1987). Quick simultaneous confidence interval for multinomial proportions. Journal of American Statistical Association 82(399):  875-878.
-2.	Glaz, J. and Sison, P.C. (1999). Simultaneous confidence interval for multinomial proportions. Journal of Statistical planning and inference 82:  251-262.
+2.  Glaz, J. and Sison, P.C. (1999). Simultaneous confidence interval for multinomial proportions. Journal of Statistical planning and inference 82:  251-262.
 3.	Goodman, L.A. (1965). On Simultaneous Confidence Intervals for Multinomial Proportions. Technometrics 7:  247-254.
 4.	Hou, C.D, Chiang, J. and Tai, J.J. (2003). A family of simultaneous confidence intervals for multinomial proportions. Computational Statistics & Data Analysis 43: 29-45.
 5.	Jhun, M. and Jeong, H.C. (2000). Applications of bootstrap methods for categorical data analysis. Computational Statistics & Data Analysis 35:  83-91.

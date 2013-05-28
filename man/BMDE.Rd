@@ -4,8 +4,7 @@
 Multinomial - Dirichlet (MD) model - Equal Prior - Bayes Methods
 }
 \description{
-This method provides a mechanism to find out simultaneous confidence interval for the counts of a two way contingency table. The method bmde assumes equal values for ??'s
-}
+This method provides 95 percent simultaneous confidence interval for multinomial proportions based on Bayesian Multinomial Dirichlet model. This method assumes equal values for the Dirichlet prior parameters}
 \usage{
 BMDE(x, p)
 }
@@ -19,6 +18,9 @@ the equal value for the Dirichlet prior parameter - positive real number
 }
 \value{
 lower, upper limits of multinomial proportions together with product of length of k intervals as volume of simultaneous confidence intervals }
+\references{
+Gelman, A., Carlin, J.B., Stern, H.S., and Rubin, D.B. (2002). Bayesian Data Analysis.  Chapman & Hall, London.
+}
 \author{
 Dr M Subbiah
 }
@@ -29,36 +31,5 @@ Dr M Subbiah
 y=c(44,55,43,32,67,78)
 z=1
 BMDE(y,z)
-function (x, p) 
-{
-    k = length(x)
-    n_r = 10000
-    for (m in 1:k) {
-        if (x[m] < 0) {
-            cat("Warning: arguments must be non-negative integers")
-        }
-    }
-    po = x + p
-    dr = rdirichlet(n_r, po)
-    a = 0
-    l = 0
-    u = 0
-    dif = 0
-    for (j in 1:k) {
-        a[j] = round(mean(dr[, j]), 4)
-        l[j] = round(quantile(dr[, j], 0.025), 4)
-        u[j] = round(quantile(dr[, j], 0.975), 4)
-        dif[j] = u[j] - l[j]
-    }
-    cat("Mean\n")
-    print(a)
-    cat("Lower Limit\n")
-    print(l)
-    cat("Upper Limit\n")
-    print(u)
-    cat("Volume \n")
-    prod(dif)
-  }
 }
 \keyword{ Bayes Method }
-
