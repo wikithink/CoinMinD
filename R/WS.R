@@ -1,6 +1,7 @@
-WS <-
-function(inpmat,alpha)
-{
+#修改了WS函数的输出格式
+#王文祥
+#2017-12-22
+WS <- function(inpmat,alpha){
 k = length(inpmat)
 s = sum(inpmat)
 chi = qchisq(1-alpha, df=1)
@@ -16,16 +17,22 @@ if (WS.UL[r] > 1) ULA[r] = 1 else ULA[r]=WS.UL[r]
 }
 diA=ULA-LLA##FIND LENGTH OF CIs
 VOL=round(prod(diA),8)##PRODUCT OF LENGTH OF CIs
-cat('Original Intervals\n')
-cat('Lower Limit\n')
-print(WS.LL)
-cat('Upper Limit\n')
-print(WS.UL)
-cat('Adjusted Intervals\n')
-cat('Lower Limit\n')
-print(LLA)
-cat('Upper Limit\n')
-print(ULA)
-cat('Volume\n')
-print(VOL)
+# cat('Original Intervals\n')
+# cat('Lower Limit\n')
+# print(WS.LL)
+# cat('Upper Limit\n')
+# print(WS.UL)
+# cat('Adjusted Intervals\n')
+# cat('Lower Limit\n')
+# print(LLA)
+# cat('Upper Limit\n')
+# print(ULA)
+# cat('Volume\n')
+# print(VOL)
+#转成数据框
+method <- 'Wilson'
+wscl <- as.data.frame(cbind(inpmat,round(pi,4),alpha,1-alpha,WS.LL,WS.UL,LLA,ULA,method))
+names(wscl) <- c("x","prop","alpha","conf","LL","UL","LLA","ULA","method")
+u <- list(wscl=wscl,vol=VOL)
+return(u)
 }
