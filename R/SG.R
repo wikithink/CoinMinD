@@ -1,10 +1,12 @@
-SG <-
-function(x,alpha)
-{
+#修改了SG函数的输出格式
+#王文祥
+#2017-12-22
+#只能是双侧，只修改了输出格式
+#Simultaneous confidence intervals for multinomial proportions, calculated according to the method of Sison and Graz
+SG <- function(x,alpha){
 t1=proc.time()
 
-sgp=function(c)
-{
+sgp=function(c){
 s=sum(x)  ##SUM(Cell_Counts)
 k=length(x)
 b= x-c
@@ -64,6 +66,7 @@ pps = 1/dpois(s,s)#POISSON PROB FOR s WITH PARAMETER AS s
 rp=pps*pcp*f/sqrt(s2)##REQUIRED PROBABILITY
 rp
 }
+#开始计算
 proc.time()-t1
 t=proc.time()
 y=0
@@ -84,7 +87,7 @@ vc=j  else
 vc=vc
 j = j+1
 }
-vc##REQUIRED VALUE OF C
+#vc##REQUIRED VALUE OF C
 delta=((1-alpha)-y[vc])/(y[vc+1]-y[vc])
 ##FINDING LIMITS
 sp=x/s#SAMPLE PROPORTION
@@ -99,16 +102,24 @@ if (UL[r] > 1) ULA[r] = 1 else ULA[r]=UL[r]
 }
 diA=ULA-LLA##FIND LENGTH OF CIs
 VOL=round(prod(diA),8)##PRODUCT OF LENGTH OF CIs
-cat('Original Intervals\n')
-cat('Lower Limit\n')
-print(LL)
-cat('Upper Limit\n')
-print(UL)
-cat('Adjusted Intervals\n')
-cat('Lower Limit\n')
-print(LLA)
-cat('Upper Limit\n')
-print(ULA)
-cat('Volume\n')
-print(VOL)
+# cat('Original Intervals\n')
+# cat('Lower Limit\n')
+# print(LL)
+# cat('Upper Limit\n')
+# print(UL)
+# cat('Adjusted Intervals\n')
+# cat('Lower Limit\n')
+# print(LLA)
+# cat('Upper Limit\n')
+# print(ULA)
+# cat('Volume\n')
+# print(VOL)
+#转成数据框
+method <- 'Sison and Glaz'
+sgcl <- as.data.frame(cbind(x,round(sp,4),alpha,1-alpha,LL,UL,LLA,ULA,method))
+names(sgcl) <- c("x","prop","alpha","conf","LL","UL","LLA","ULA","method")
+u <- list(sgcl=sgcl,vol=VOL)
+return(u)
 }
+
+
