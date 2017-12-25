@@ -1,6 +1,8 @@
-BMDU <-
-function(x,d)
-{
+#修改了BMDU函数的输出格式
+#王文祥
+#2017-12-22
+BMDU <- function(x,d){
+#d is the number of divisions required to split the prior vector of Dirichlet distribution to assign unequal values from U(0,1) and U(1,2)
 k=length(x)
 for(m in 1:k)
 {
@@ -28,17 +30,25 @@ u[j]=round(quantile(dr[,j],0.975),4)###Upper Limit
 m[j]=round(mean(dr[,j]),4)###Point Estimate
 diff[j]=u[j]-l[j]
 }
-cat('Mean\n')
-print(m)
-cat('Lower Limit\n')
-print(l)
-cat('Upper Limit\n')
-print(u)
-p=prod(diff)
-cat('Volume\n')
-print(p)
+VOL <- prod(diff)
+# cat('Mean\n')
+# print(m)
+# cat('Lower Limit\n')
+# print(l)
+# cat('Upper Limit\n')
+# print(u)
+# p=prod(diff)
+# cat('Volume\n')
+# print(p)
+
 }
 else
 {cat('warning:size of the division should be less than the size of the input matrix')
 }
+#转成数据框
+method <- 'Dirichlet-UnEqualPrior Bayes'
+bmducl <- as.data.frame(cbind(x,round(x/sum(x),4),m,l,u,method))
+names(bmducl) <- c("x","prop","mean","LLA","ULA","method")
+u <- list(bmducl=bmducl,vol=VOL,d=d)
+return(u)
 }
